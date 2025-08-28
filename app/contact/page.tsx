@@ -22,16 +22,15 @@ export default function ContactPage() {
     }
 
     const formData = {
-  first_name: form["first-name"].value,
-  last_name: form["last-name"].value,
-  email: form.email.value,
-  mobile: form.mobile.value,
-  account_type: form["account-type"].value,
-  age: Number(form.age.value),
-  referrer: form.referrer.value,
-  bio: form.bio.value,
-};
-
+      first_name: form["first-name"].value,
+      last_name: form["last-name"].value,
+      email: form.email.value,
+      mobile: form.mobile.value,
+      account_type: form["account-type"].value,
+      age: Number(form.age.value),
+      referrer: form.referrer.value,
+      bio: form.bio.value,
+    };
 
     const result = await sendContact(formData);
 
@@ -90,7 +89,11 @@ export default function ContactPage() {
                   <br />
                   Salamata vous recontactera rapidement.
                 </p>
-                <form method="post" onSubmit={handleSubmit} className="space-y-6">
+                <form
+                  method="post"
+                  onSubmit={handleSubmit}
+                  className="space-y-6"
+                >
                   <div className="grid md:grid-cols-2 gap-4">
                     <label className="flex flex-col">
                       Prénom :
@@ -196,7 +199,7 @@ export default function ContactPage() {
                       required
                       className="mr-2"
                     />
-                    J'accepte les {" "}
+                    J'accepte les{" "}
                     <a
                       href="https://www.freecodecamp.org/news/terms-of-service/"
                       target="_blank"

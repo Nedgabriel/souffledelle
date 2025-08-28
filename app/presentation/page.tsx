@@ -21,7 +21,7 @@ export default function PresentationPage() {
             {/* Photo */}
             <div className="w-full md:w-1/3">
               <img
-                src="/images/Salamata.png" // adapte le chemin si nécessaire
+                src="/images/Salamata.png"
                 alt="Portrait de Salamata"
                 className="rounded-2xl shadow-lg w-full h-auto object-cover"
               />
@@ -195,7 +195,7 @@ export default function PresentationPage() {
               créneaux suivants se prennent directement ensemble ou via{" "}
               <strong className="text-green-700">Calendly</strong>.
               <a
-                href="/Contact"
+                href="/contact"
                 className="block mx-auto mt-12 px-8 py-3 rounded-full bg-[#003938] text-white font-semibold shadow-lg hover:bg-green-600 transition-colors duration-200 text-center w-fit"
               >
                 Prendre rendez-vous

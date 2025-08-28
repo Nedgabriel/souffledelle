@@ -8,18 +8,19 @@ export default function Footer() {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-
     <footer className="bg-[#003938] text-white p-6 rounded-2xl flex flex-wrap gap-6 justify-center ">
       {/* Bloc newsletter */}
       <div className="flex-1 min-w-[250px] max-w-[350px]">
         <div className="flex flex-col items-start">
-          <Image
-            src="/logo-couleur-sophro.png"
-            alt="Logo Salamata"
-            width={100}
-            height={100}
-            className="mb-4"
-          />
+          <Link href="/">
+            <Image
+              src="/logo-couleur-sophro.png"
+              alt="Logo Salamata"
+              width={100}
+              height={100}
+              className="mb-4"
+            />
+          </Link>
           <h2 className="font-poppins mb-4 text-lg font-semibold">
             Abonnez-vous à notre newsletter pour recevoir toutes les dernières
             nouvelles.
@@ -59,7 +60,9 @@ export default function Footer() {
 
       {/* Bloc contact */}
       <div className="flex-1 min-w-[250px] max-w-[350px]">
-        <h2 className="font-poppins mb-4 text-lg font-semibold">Coordonnées de contact</h2>
+        <h2 className="font-poppins mb-4 text-lg font-semibold">
+          Coordonnées de contact
+        </h2>
         <p className="flex items-center gap-3 mb-4 text-base">
           📞 06.79.16.61.55
         </p>
@@ -80,7 +83,9 @@ export default function Footer() {
       </div>
 
       <div className="flex-1 min-w-[250px] max-w-[350px] flex flex-col items-start">
-        <h2 className="font-poppins mb-4 text-lg font-semibold">Réseaux sociaux</h2>
+        <h2 className="font-poppins mb-4 text-lg font-semibold">
+          Réseaux sociaux
+        </h2>
         <div className="flex items-center gap-4">
           {/* Linktree */}
           <Link
@@ -96,8 +101,6 @@ export default function Footer() {
               className="rounded-full"
             />
           </Link>
-
-          
 
           <Link
             href="https://www.instagram.com/salamataleldo/"
