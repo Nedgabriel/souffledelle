@@ -11,12 +11,21 @@ export async function sendContact(formData: {
   bio?: string;
   message?: string;
 }) {
-  const { data, error } = await supabase.from("contacts").insert([formData]);
+  try {
+    // Enregistrer dans Supabase
+    const { error } = await supabase.from("contacts").insert([formData]);
+    if (error) throw error;
 
-  if (error) {
-    console.error("Erreur lors de l'envoi à Supabase :", error.message);
-    return { success: false, error: error.message };
+    // Appeler l’API pour envoyer le mail
+    await fetch("https://ton-domaine.com/api/sendEmail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    return { success: true };
+  } catch (err: any) {
+    console.error("Erreur lors de l'envoi :", err.message);
+    return { success: false, error: err.message };
   }
-
-  return { success: true, data };
 }

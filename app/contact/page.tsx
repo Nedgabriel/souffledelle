@@ -20,7 +20,6 @@ export default function ContactPage() {
       alert("Veuillez accepter les conditions.");
       return;
     }
-
     const formData = {
       first_name: form["first-name"].value,
       last_name: form["last-name"].value,

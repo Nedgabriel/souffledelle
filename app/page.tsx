@@ -26,13 +26,13 @@ export default function Home() {
       summary:
         "Découvrez les bienfaits d’une respiration guidée pour retrouver le calme.",
       content: `...`,
-      image: "/images/article-respiration.jpg",
+      image: "/images/sophrologue.jpg",
     },
     {
       title: "Pourquoi consulter un sophrologue ?",
       summary: "Un accompagnement pour mieux gérer le stress...",
       content: `...`,
-      image: "/images/article-consultation.jpg",
+      image: "/images/respiration.jpeg",
     },
   ];
 
