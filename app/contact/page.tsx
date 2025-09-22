@@ -100,7 +100,7 @@ export default function ContactPage() {
                         type="text"
                         name="first-name"
                         required
-                        className="input"
+                        className="input border-none shadow-md"
                       />
                     </label>
                     <label className="flex flex-col">
@@ -109,7 +109,7 @@ export default function ContactPage() {
                         type="text"
                         name="last-name"
                         required
-                        className="input"
+                        className="input border-none shadow-mdinput border-none shadow-md"
                       />
                     </label>
                     <label className="flex flex-col md:col-span-2">
@@ -118,7 +118,7 @@ export default function ContactPage() {
                         type="email"
                         name="email"
                         required
-                        className="input"
+                        className="input border-none shadow-md"
                       />
                     </label>
                     <label className="flex flex-col md:col-span-2">
@@ -127,12 +127,12 @@ export default function ContactPage() {
                         type="tel"
                         name="mobile"
                         required
-                        className="input"
+                        className="input border-none shadow-md"
                       />
                     </label>
                   </div>
 
-                  <fieldset className="border rounded p-4">
+                  <fieldset className="border-none shadow-md rounded p-4">
                     <legend className="font-semibold mb-2">
                       Type de compte
                     </legend>
@@ -165,13 +165,13 @@ export default function ContactPage() {
                         name="age"
                         min="13"
                         max="120"
-                        className="input"
+                        className="input border-none shadow-md"
                       />
                     </label>
 
                     <label className="flex flex-col">
                       Comment m'avez-vous connue ?
-                      <select name="referrer" className="input">
+                      <select name="referrer" className="input border-none shadow-md">
                         <option value="">Sélectionnez une option</option>
                         <option value="site">Site web</option>
                         <option value="bouche">Bouche à oreille</option>
@@ -186,7 +186,7 @@ export default function ContactPage() {
                         name="bio"
                         rows={4}
                         placeholder="Je suis à la recherche de..."
-                        className="input resize-none"
+                        className="input border-none shadow-md"
                       />
                     </label>
                   </div>
