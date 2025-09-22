@@ -13,33 +13,30 @@ export default function ContactPage() {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
+  e.preventDefault();
+  const form = e.currentTarget;
+  const fd = new FormData(form);
 
-    if (!form.terms.checked) {
-      alert("Veuillez accepter les conditions.");
-      return;
-    }
-    const formData = {
-      first_name: form["first-name"].value,
-      last_name: form["last-name"].value,
-      email: form.email.value,
-      mobile: form.mobile.value,
-      account_type: form["account-type"].value,
-      age: Number(form.age.value),
-      referrer: form.referrer.value,
-      bio: form.bio.value,
-    };
-
-    const result = await sendContact(formData);
-
-    if (result.success) {
-      alert("Formulaire envoyé avec succès !");
-      form.reset();
-    } else {
-      alert("Erreur : " + result.error);
-    }
+  const payload = {
+    first_name: fd.get("first-name")?.toString() ?? "",
+    last_name: fd.get("last-name")?.toString() ?? "",
+    email: fd.get("email")?.toString() ?? "",
+    mobile: fd.get("mobile")?.toString() ?? "",
+    account_type: fd.get("account-type")?.toString() ?? "",
+    age: fd.get("age") ? Number(fd.get("age")) : undefined,
+    referrer: fd.get("referrer")?.toString() ?? "",
+    bio: fd.get("bio")?.toString() ?? "",
   };
+
+  const result = await sendContact(payload);
+  if (result.success) {
+    alert("Formulaire envoyé — merci !");
+    form.reset();
+  } else {
+    alert("Erreur : " + result.error);
+  }
+};
+
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
