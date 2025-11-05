@@ -13,30 +13,29 @@ export default function ContactPage() {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  const form = e.currentTarget;
-  const fd = new FormData(form);
+    e.preventDefault();
+    const form = e.currentTarget;
+    const fd = new FormData(form);
 
-  const payload = {
-    first_name: fd.get("first-name")?.toString() ?? "",
-    last_name: fd.get("last-name")?.toString() ?? "",
-    email: fd.get("email")?.toString() ?? "",
-    mobile: fd.get("mobile")?.toString() ?? "",
-    account_type: fd.get("account-type")?.toString() ?? "",
-    age: fd.get("age") ? Number(fd.get("age")) : undefined,
-    referrer: fd.get("referrer")?.toString() ?? "",
-    bio: fd.get("bio")?.toString() ?? "",
+    const payload = {
+      first_name: fd.get("first-name")?.toString() ?? "",
+      last_name: fd.get("last-name")?.toString() ?? "",
+      email: fd.get("email")?.toString() ?? "",
+      mobile: fd.get("mobile")?.toString() ?? "",
+      account_type: fd.get("account-type")?.toString() ?? "",
+      age: fd.get("age") ? Number(fd.get("age")) : undefined,
+      referrer: fd.get("referrer")?.toString() ?? "",
+      bio: fd.get("bio")?.toString() ?? "",
+    };
+
+    const result = await sendContact(payload);
+    if (result.success) {
+      alert("Formulaire envoyé — merci !");
+      form.reset();
+    } else {
+      alert("Erreur : " + result.error);
+    }
   };
-
-  const result = await sendContact(payload);
-  if (result.success) {
-    alert("Formulaire envoyé — merci !");
-    form.reset();
-  } else {
-    alert("Erreur : " + result.error);
-  }
-};
-
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,13 +48,13 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="flex flex-col bg-[#fdfaf6] text-[#2f2f2f]">
+    <div>
       <Header />
 
       <main className="flex-grow px-4 py-12">
-        <div className="w-full max-w-[1000px] mx-auto flex justify-center [transform-style:preserve-3d] [perspective:1000px]">
+        <div className="w-full max-w-[1100px] mx-auto flex justify-center [transform-style:preserve-3d] [perspective:1000px]">
           <div
-            className={`relative w-full h-[1125px] transition-transform duration-700 [transform-style:preserve-3d] ${
+            className={`relative w-full h-[1100px] transition-transform duration-700 [transform-style:preserve-3d] ${
               flipped ? "[transform:rotateY(180deg)]" : ""
             }`}
           >
@@ -65,15 +64,15 @@ export default function ContactPage() {
                 flipped ? "hidden" : "block"
               }`}
             >
-              <div className="bg-white p-8 rounded-xl shadow-xl h-full">
-                <h1 className="text-3xl md:text-4xl font-bold text-green-700 text-center mb-6">
+              <div className="bg-white p-8 rounded-xl shadow-xl ">
+                <h2 className="text-3xl md:text-4xl  text-center mb-6">
                   Contact & Connexion
-                </h1>
+                </h2>
                 <div className="text-center mt-6">
                   <p className="mb-6">
                     <button
                       onClick={() => setFlipped(true)}
-                      className="font-bold text-green-700 underline hover:text-green-900 text-lg md:text-xl"
+                      className="font-bold text-green-800 underline hover:text-green-600 text-lg md:text-xl"
                       style={{ fontSize: "1.25rem" }}
                     >
                       Se connecter
@@ -91,45 +90,45 @@ export default function ContactPage() {
                   className="space-y-6"
                 >
                   <div className="grid md:grid-cols-2 gap-4">
-                    <label className="flex flex-col">
+                    <label className="flex flex-col shadow-md rounded-lg">
                       Prénom :
                       <input
                         type="text"
                         name="first-name"
                         required
-                        className="input border-none shadow-md"
+                        className="input border-none "
                       />
                     </label>
-                    <label className="flex flex-col">
+                    <label className="flex flex-col shadow-md rounded-lg">
                       Nom :
                       <input
                         type="text"
                         name="last-name"
                         required
-                        className="input border-none shadow-mdinput border-none shadow-md"
+                        className="input border-none shadow-mdinput border-none"
                       />
                     </label>
-                    <label className="flex flex-col md:col-span-2">
+                    <label className="flex flex-col md:col-span-2 shadow-md rounded-lg">
                       Email :
                       <input
                         type="email"
                         name="email"
                         required
-                        className="input border-none shadow-md"
+                        className="input border-none"
                       />
                     </label>
-                    <label className="flex flex-col md:col-span-2">
+                    <label className="flex flex-col md:col-span-2 shadow-md rounded-lg">
                       Mobile :
                       <input
                         type="tel"
                         name="mobile"
                         required
-                        className="input border-none shadow-md"
+                        className="input border-none"
                       />
                     </label>
                   </div>
 
-                  <fieldset className="border-none shadow-md rounded p-4">
+                  <fieldset className="border-none shadow-md p-4 rounded-lg">
                     <legend className="font-semibold mb-2">
                       Type de compte
                     </legend>
@@ -155,20 +154,23 @@ export default function ContactPage() {
                   </fieldset>
 
                   <div className="grid gap-4">
-                    <label className="flex flex-col">
+                    <label className="flex flex-col shadow-md rounded-lg">
                       Âge :
                       <input
                         type="number"
                         name="age"
                         min="13"
                         max="120"
-                        className="input border-none shadow-md"
+                        className="input border-none "
                       />
                     </label>
 
-                    <label className="flex flex-col">
+                    <label className="flex flex-col rounded-lg">
                       Comment m'avez-vous connue ?
-                      <select name="referrer" className="input border-none shadow-md">
+                      <select
+                        name="referrer"
+                        className="input border-none shadow-md rounded-lg"
+                      >
                         <option value="">Sélectionnez une option</option>
                         <option value="site">Site web</option>
                         <option value="bouche">Bouche à oreille</option>
@@ -177,13 +179,13 @@ export default function ContactPage() {
                       </select>
                     </label>
 
-                    <label className="flex flex-col">
+                    <label className="flex flex-col shadow-md rounded-lg">
                       Décrivez votre besoin :
                       <textarea
                         name="bio"
                         rows={4}
                         placeholder="Je suis à la recherche de..."
-                        className="input border-none shadow-md"
+                        className="input border-none "
                       />
                     </label>
                   </div>
@@ -197,7 +199,7 @@ export default function ContactPage() {
                     />
                     J'accepte les{" "}
                     <a
-                      href="https://www.freecodecamp.org/news/terms-of-service/"
+                      href="https://fjrhwflqjaecexhneblt.supabase.co/storage/v1/object/public/articles-images/CGU_CGV_Souffledelle_Stylise.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-700 underline"
@@ -209,7 +211,7 @@ export default function ContactPage() {
                   <div className="text-center">
                     <button
                       type="submit"
-                      className="mt-6 px-6 py-3 bg-green-700 text-white font-semibold rounded-full hover:bg-green-800 transition"
+                      className="mt-6 px-6 py-3 bg-green-800 text-white font-semibold rounded-full hover:bg-green-600 transition"
                     >
                       Envoyer
                     </button>
@@ -220,6 +222,67 @@ export default function ContactPage() {
 
             {/* Face arrière : formulaire de connexion */}
             <div
+              className={`absolute w-full h-[500px] backface-hidden [transform:rotateY(180deg)] ${
+                flipped ? "block" : "hidden"
+              }`}
+            >
+              <div className="relative bg-white p-8 rounded-xl shadow-xl h-full overflow-hidden">
+                {/* Bandeau "À venir" */}
+                <div className="absolute top-0 left-0 w-full bg-green-700 text-white text-center py-2 font-bold z-20">
+                  🚧 À venir 🚧
+                </div>
+
+                {/* Overlay flouté */}
+                <div className="absolute inset-0 backdrop-blur-sm bg-white/70 z-10 flex flex-col items-center justify-center rounded-xl">
+                  <p className="text-xl font-semibold text-green-800 text-center mb-4">
+                    Cette fonctionnalité sera disponible bientôt
+                  </p>
+                  <hr />
+                  <button
+                    onClick={() => setFlipped(false)}
+                    className="text-sm text-green-700 underline hover:text-green-900"
+                  >
+                    ← Revenir au formulaire de contact
+                  </button>
+                </div>
+
+                {/* Contenu du formulaire (flouté derrière l’overlay) */}
+                <div className="relative z-0">
+                  <h1 className="text-3xl md:text-4xl font-bold text-green-700 text-center mb-6">
+                    Connexion à l'espace client
+                  </h1>
+                  <form className="space-y-6">
+                    <label className="flex flex-col">
+                      Email :
+                      <input
+                        type="email"
+                        disabled
+                        className="input opacity-50 cursor-not-allowed"
+                      />
+                    </label>
+                    <label className="flex flex-col">
+                      Mot de passe :
+                      <input
+                        type="password"
+                        disabled
+                        className="input opacity-50 cursor-not-allowed"
+                      />
+                    </label>
+                    <div className="text-center">
+                      <button
+                        type="button"
+                        disabled
+                        className="mt-6 px-6 py-3 bg-gray-400 text-white font-semibold rounded-full cursor-not-allowed"
+                      >
+                        Connexion
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            {/*<div
               className={`absolute w-full h-[500px] backface-hidden [transform:rotateY(180deg)] ${
                 flipped ? "block" : "hidden"
               }`}
@@ -275,7 +338,7 @@ export default function ContactPage() {
                   </button>
                 </div>
               </div>
-            </div>
+            </div>*/}
           </div>
         </div>
       </main>

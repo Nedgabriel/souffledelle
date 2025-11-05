@@ -1,4 +1,3 @@
-
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -7,7 +6,10 @@ export async function POST(req: Request) {
     const { to, subject, html } = body;
 
     if (!process.env.RESEND_API_KEY) {
-      return NextResponse.json({ error: "RESEND_API_KEY non défini" }, { status: 500 });
+      return NextResponse.json(
+        { error: "RESEND_API_KEY non défini" },
+        { status: 500 }
+      );
     }
 
     const res = await fetch("https://api.resend.com/emails", {
@@ -17,7 +19,7 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Salamata <no-reply@souffledelle.fr>",
+        from: "Salamata <onboarding@resend.dev>",
         to,
         subject,
         html,
@@ -31,6 +33,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message || "Erreur serveur" }, { status: 500 });
+    return NextResponse.json(
+      { error: err.message || "Erreur serveur" },
+      { status: 500 }
+    );
   }
 }

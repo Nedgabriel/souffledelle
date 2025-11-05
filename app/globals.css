@@ -1,41 +1,92 @@
 @import "tailwindcss";
 
+
 :root {
-  --background: #ffffff;
+  --background: #fdfaf6;
   --foreground: #171717;
+  --green: #15803d;
 }
 
 :root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-green: var(--green);
+  --font-poppins: "Poppins", sans-serif;
+  --font-nunito: "Nunito", sans-serif;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #fdfaf6;
+    --foreground: #333333;
+    --green: #15803d;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-nunito), sans-serif;
 }
 
 .font-poppins {
   font-family: var(--font-poppins), sans-serif;
-}
-
+}  
+  
 .font-nunito {
   font-family: var(--font-nunito), sans-serif;
 }
-.input {
-  @apply bg-white border border-gray-300 rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-green-500 transition;
+.font-dancing {
+  font-family: 'Dancing Script', cursive;
 }
-/* À ajouter dans globals.css si pas déjà présent */
+
+/* Headings styles */
+
+.section-bg {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 200px;
+  padding: 2.5rem 2.5rem;
+}
+.bg-aloe {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+h1 {
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: bold;
+  color: var(--color-green);
+}
+.title {
+  font-family: var(--font-nunito), sans-serif;
+  font-weight: bold;
+  color: var(--color-green);
+}
+.title-paragraph {
+  font-family: var(--font-nunito), sans-serif;
+  color: var(--color-background);
+}
+.menu-desktop {
+  font-family: var(--font-nunito), sans-serif;
+  font-weight: 600;
+  color: var(--color-background);
+  max-width: 36rem;
+}
+
+
+/* body styles */
+h2, h3, h4, h5, h6 {
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: bold;
+  color: #003938;
+}
+
 .perspective {
   perspective: 1000px;
 }
@@ -44,4 +95,53 @@ body {
 }
 .rotate-y-180 {
   transform: rotateY(180deg);
+}
+.ProseMirror {
+  min-height: 150px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  outline: none;
+}
+
+.ProseMirror p {
+  margin: 0 0 0.5em 0;
+}
+
+/* Footer styles */
+footer {
+  font-size: 1rem;
+  background-color: #003938;
+  color : white;
+}
+
+footer h2 {
+  font-family: var(--font-poppins), sans-serif;
+  color: var(--color-background);
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+footer div {
+  min-width: 250px;
+  max-width: 350px;
+}
+footer iframe {
+  display: block;
+  border: none;
+  width: 100%;
+  height: 200px;
+}
+.btn-green {
+  width: 3rem;
+  height: 3rem;
+  background-color: #15803d;
+  border-radius: 50%;
+  display: flex;            
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-green:hover {
+  background-color: #16a34a;
 }

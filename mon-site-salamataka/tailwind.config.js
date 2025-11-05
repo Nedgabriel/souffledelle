@@ -7,12 +7,14 @@ export default {
     "./pages/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ["var(--font-nunito)", "sans-serif"],
-        heading: ["var(--font-poppins)", "sans-serif"],
-      },
+  extend: {
+    fontFamily: {
+      poppins: ['var(--font-poppins)', 'sans-serif'],
+      nunito: ['var(--font-nunito)', 'sans-serif'],
+      dancing: ['var(--font-dancing)', 'cursive'],
     },
   },
+},
   plugins: [lineClamp, require("flowbite/plugin")],
+  plugins: [require("@tailwindcss/typography")],
 };

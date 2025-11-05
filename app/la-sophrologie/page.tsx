@@ -17,7 +17,7 @@ export default function Sophrologie() {
     <>
       <Header />
       <main
-        className="relative bg-fixed bg-cover bg-center text-[#2f2f2f] p-6 sm:p-12"
+        className="relative bg-fixed bg-cover bg-center text-[#2f2f2f] p-6 sm:p-8 min-h-screen"
         style={{
           backgroundImage:
             "url('/images/ryunosuke-kikuno-at35PQ5-50Q-unsplash.jpg')",
@@ -26,12 +26,12 @@ export default function Sophrologie() {
         <Timeline />
 
         {/* Blocs de texte */}
-        <section className="max-w-4xl mx-auto bg-white/80 p-8 rounded-lg shadow-lg mt-20 space-y-8">
+        <section className="max-w-4xl mx-auto bg-white/70 backdrop-blur-md p-6 sm:p-8 rounded-lg shadow-lg  ">
           <div>
-            <h3 className="font-poppins text-xl font-bold mb-2">
+            <h3 className="text-xl ">
               Qu’est‑ce que la sophrologie ?
             </h3>
-            <p className="font-sans">
+            <p >
               La sophrologie est une méthode psycho-corporelle qui combine des
               techniques de respiration, de relaxation musculaire et de
               visualisation positive. Accessible à tous, elle vise à harmoniser
@@ -43,9 +43,9 @@ export default function Sophrologie() {
             </p>
           </div>
         </section>
-        <section className="max-w-4xl mx-auto bg-white/80 p-8 rounded-lg shadow-lg mt-20 space-y-8">
+        <section className="max-w-4xl mx-auto bg-white/80 backdrop-blur-md p-6 sm:p-8 rounded-lg shadow-lg mt-10">
           <div>
-            <h3 className="font-poppins text-xl font-bold mb-2">
+            <h3 className="text-xl  mb-2">
               Principes & techniques
             </h3>
             <ul className="list-disc pl-6 space-y-1">
@@ -63,34 +63,34 @@ export default function Sophrologie() {
             </ul>
           </div>
         </section>
-        <section className="max-w-4xl mx-auto bg-white/80 p-8 rounded-lg shadow-lg mt-20 space-y-8">
+        <section className="max-w-4xl mx-auto bg-white/80 backdrop-blur-md p-6 sm:p-8 rounded-lg shadow-lg mt-10 ">
           <div>
-            <h3 className="font-poppins text-xl font-bold mb-2">
+            <h3 className="text-xl  mb-2">
               Les bienfaits de la sophrologie
             </h3>
             Voici ce que la sophrologie peut apporter aux personnes accompagnées
             :
-            <p className="font-sans">
+            <p >
               🔹 Réduction du stress et de l’anxiété La pratique régulière aide
               à calmer le mental, à détendre le corps et à mieux gérer les
               émotions au quotidien.
             </p>
-            <p className="font-sans">
+            <p >
               🔹 Amélioration du sommeil Grâce aux techniques de respiration et
               de détente, elle favorise l’endormissement, réduit les réveils
               nocturnes et améliore la qualité du sommeil.
             </p>
-            <p className="font-sans">
+            <p >
               🔹 Renforcement de la confiance en soi En se reconnectant à ses
               ressources personnelles, on développe une image de soi plus
               sereine et plus positive.
             </p>
-            <p className="font-sans">
+            <p >
               🔹 Préparation mentale aux événements Examens, entretiens,
               accouchement, compétition sportive… la sophrologie permet de mieux
               vivre ces étapes en se projetant de manière sereine.
             </p>
-            <p className="font-sans">
+            <p >
               🔹 Accompagnement dans la douleur ou la maladie Sans remplacer un
               suivi médical, la sophrologie aide à mieux vivre les douleurs
               chroniques ou les traitements lourds, en favorisant un rapport
@@ -98,22 +98,22 @@ export default function Sophrologie() {
             </p>
           </div>
         </section>
-        <section className="max-w-4xl mx-auto bg-white/80 p-8 rounded-lg shadow-lg mt-20 space-y-8">
+        <section className="max-w-4xl mx-auto bg-white/80 backdrop-blur-md p-6 sm:p-8 rounded-lg shadow-lg mt-10 space-y-8">
           <div>
-            <h3 className="font-poppins text-xl font-bold mb-2">Pour qui ?</h3>
-            <p className="font-sans">
+            <h3 className="text-xl mb-2">Pour qui ?</h3>
+            <p >
               Accessible à tous : enfants, adultes, seniors. Adaptée pour gérer
               le stress, faciliter le sommeil, accompagner des douleurs
               chroniques…
             </p>
           </div>
         </section>
-        <section className="max-w-4xl mx-auto bg-white/80 p-8 rounded-lg shadow-lg mt-20 space-y-8">
+        <section className="max-w-4xl mx-auto bg-white/80 backdrop-blur-md p-6 sm:p-8 rounded-lg shadow-lg mt-10 space-y-8">
           <div>
-            <h3 className="font-poppins text-xl font-bold mb-2">
+            <h3 className="text-xl mb-2 py-2">
               Pourquoi choisir la sophrologie avec Salamata KA ?
             </h3>
-            <p className="font-sans">
+            <p >
               Salamata KA est une praticienne expérimentée et passionnée par la
               sophrologie. Elle propose un accompagnement personnalisé, adapté
               aux besoins de chacun. Grâce à sa bienveillance et son écoute,

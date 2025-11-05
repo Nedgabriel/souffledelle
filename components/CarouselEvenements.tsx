@@ -1,23 +1,17 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import { sendInscription } from "@/lib/sendInscription";
 
 type Event = {
+  id: number;
   date: string;
-  titre: string;
+  title: string;
 };
 
-const evenements: Event[] = [
-  { date: "25 juin", titre: "Atelier gestion du stress" },
-  { date: "3 juillet", titre: "Séance collective relaxation" },
-  { date: "15 juillet", titre: "Stage respiration consciente" },
-  { date: "20 juillet", titre: "Atelier respiration profonde et bien-être" },
-  { date: "5 août", titre: "Séance sophrologie en groupe" },
-  { date: "12 août", titre: "Atelier gestion des émotions" },
-  { date: "22 août", titre: "Stage sophrologie et pleine conscience" },
-];
-
 export default function CarouselEvenements() {
+  const [evenements, setEvenements] = useState<Event[]>([]);
   const [hover, setHover] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [formData, setFormData] = useState({
@@ -25,6 +19,7 @@ export default function CarouselEvenements() {
     prenom: "",
     email: "",
     telephone: "",
+    evenement: "",
   });
 
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -32,11 +27,63 @@ export default function CarouselEvenements() {
   const [containerHeight, setContainerHeight] = useState(120);
   const hoverTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  // Constants
-  const STACK_OFFSET = 10; // décalage vertical entre cartes en mode "pile"
-  const MIN_HEIGHT = 120; // hauteur minimum du container quand empilé
+  // Charger les événements depuis Supabase
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const { data, error } = await supabase
+        .from("events")
+        .select("*")
+        .order("date", { ascending: true });
 
-  // Calcul dynamique des hauteurs (somme des cartes + marges)
+      if (error) {
+        console.error("Erreur lors de la récupération des événements :", error);
+      } else {
+        setEvenements(data as Event[]);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  // Soumission du formulaire
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedEvent) {
+      alert("Veuillez sélectionner un événement.");
+      return;
+    }
+
+    const data = {
+      nom: formData.nom,
+      prenom: formData.prenom,
+      email: formData.email,
+      telephone: formData.telephone,
+      evenement_date: selectedEvent.date,
+      evenement_titre: selectedEvent.title,
+    };
+
+    const result = await sendInscription(data);
+
+    if (result.success) {
+      alert("Inscription envoyée avec succès !");
+      setSelectedEvent(null);
+      setFormData({
+        nom: "",
+        prenom: "",
+        email: "",
+        telephone: "",
+        evenement: "",
+      });
+    } else {
+      alert("Erreur : " + result.error);
+    }
+  };
+
+  // Constants
+  const STACK_OFFSET = 10;
+  const MIN_HEIGHT = 120;
+
+  // Calcul dynamique de la hauteur
   useEffect(() => {
     const updateHeights = () => {
       const cards = cardRefs.current || [];
@@ -45,7 +92,6 @@ export default function CarouselEvenements() {
         return;
       }
 
-      // calculer la hauteur totale en mode déplié
       let total = 0;
       cards.forEach((el) => {
         if (!el) return;
@@ -54,7 +100,6 @@ export default function CarouselEvenements() {
         total += el.offsetHeight + marginBottom;
       });
 
-      // ajouter la padding vertical du wrapper parent (celui qui contient le container)
       let parentPadding = 0;
       const parent = containerRef.current?.parentElement;
       if (parent) {
@@ -65,29 +110,19 @@ export default function CarouselEvenements() {
       }
       total += parentPadding;
 
-      // hauteur minimale (on prend la hauteur de la première carte + marge si besoin)
       const firstH = cards[0]?.offsetHeight || MIN_HEIGHT;
       const min = Math.max(MIN_HEIGHT, firstH + STACK_OFFSET * 2);
 
-      // appliquer la hauteur correspondante selon hover
       setContainerHeight(hover ? total : min);
     };
 
-    // mise à jour initiale et au resize
     updateHeights();
     window.addEventListener("resize", updateHeights);
     return () => window.removeEventListener("resize", updateHeights);
   }, [hover, evenements.length]);
 
-  const handleChange = (e: { target: { name: any; value: any } }) =>
+  const handleChange = (e: { target: { name: string; value: string } }) =>
     setFormData((s) => ({ ...s, [e.target.name]: e.target.value }));
-
-  const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    console.log("Inscription :", { event: selectedEvent, ...formData });
-    // TODO: envoi vers Supabase / API / mail
-    setSelectedEvent(null);
-  };
 
   useEffect(() => {
     return () => {
@@ -95,19 +130,33 @@ export default function CarouselEvenements() {
     };
   }, []);
 
+  function formatDate(dateStr: string) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+    });
+  }
+
   return (
-    <div className="bg-green-50  p-4 rounded-xl shadow-md w-96 mx-auto">
-      <div className="flex items-center justify-between mb-4">
+    <div className="bg-green-50 p-4 rounded-xl shadow-md w-96 mx-auto ">
+      <div className="flex items-center justify-between mb-4 ">
         <h3 className="text-xl font-semibold mb-4 text-green-800">
           Événements à venir 🌿
         </h3>
-        <button
-          onClick={() => setSelectedEvent(evenements[0])}
-          className="px-3 py-1 text-sm bg-[#003938] text-white rounded-lg shadow hover:bg-green-700 transition"
-        >
-          S'inscrire
-        </button>
+        {evenements.length > 0 && (
+          <button
+            onClick={() => {
+              setSelectedEvent(evenements[0]);
+              setFormData((f) => ({ ...f, evenement: evenements[0].date }));
+            }}
+            className="px-3 py-1 text-sm bg-[#003938] text-white rounded-lg shadow hover:bg-green-700 transition"
+          >
+            S'inscrire
+          </button>
+        )}
       </div>
+
       {/* container animé */}
       <div
         ref={containerRef}
@@ -118,28 +167,34 @@ export default function CarouselEvenements() {
           setHover(true);
         }}
         onMouseLeave={() => {
-          hoverTimeout.current = setTimeout(() => setHover(false), 1500); // 500ms de délai
+          hoverTimeout.current = setTimeout(() => setHover(false), 2500);
         }}
       >
         {evenements.map((event, i) => (
           <div
-            key={i}
+            key={event.id || i}
             ref={(el: HTMLDivElement | null) => {
               cardRefs.current[i] = el;
             }}
-            className="p-3 mb-2 rounded-lg shadow-md bg-white transition-all duration-500 ease-in-out"
+            className={`p-3 mb-2 rounded-lg shadow-md bg-white transition-all duration-500 ease-in-out ${
+              !hover ? "h-16 flex items-center" : ""
+            }`}
             style={{
-              // si non survolé => superposition (absolute décalée)
-              // si survolé => cartes dans le flux normal (position: static/relative)
               position: hover ? "relative" : "absolute",
               left: 0,
               right: 0,
               top: hover ? undefined : `${i * STACK_OFFSET}px`,
               zIndex: evenements.length - i,
             }}
+            onClick={() => {
+              setSelectedEvent(event);
+              setFormData((f) => ({ ...f, evenement: event.date }));
+            }}
           >
-            <p className="text-green-700 font-medium">{event.date}</p>
-            <p className="text-gray-700 mb-2">{event.titre}</p>
+            <p className="text-green-700 font-medium">
+              {formatDate(event.date)} —{" "}
+              <span className="text-gray-700">{event.title}</span>
+            </p>
           </div>
         ))}
       </div>
@@ -193,28 +248,42 @@ export default function CarouselEvenements() {
                 onChange={handleChange}
                 className="w-full rounded-lg shadow-sm p-2"
               />
+
               <div>
                 <label className="block text-sm font-medium">
                   Choisir un événement
                 </label>
-                <select className="w-full rounded-lg shadow-sm p-4 mb-4" required>
-                  {evenements.map((evt, idx) => (
-                    <option key={idx} value={evt.date}>
-                      {evt.date} – {evt.titre}
+                <select
+                  name="evenement"
+                  value={formData.evenement}
+                  onChange={(e) => {
+                    handleChange(e);
+                    const evt = evenements.find(
+                      (ev) => ev.date === e.target.value
+                    );
+                    if (evt) setSelectedEvent(evt);
+                  }}
+                  className="w-full rounded-lg shadow-sm p-4 mb-4"
+                  required
+                >
+                  {evenements.map((evt) => (
+                    <option key={evt.id} value={evt.date}>
+                      {formatDate(evt.date)} – {evt.title}
                     </option>
                   ))}
                 </select>
               </div>
+
               <button
                 type="button"
                 onClick={() => setSelectedEvent(null)}
-                className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
+                className="px-8 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 shadow-md mr-2"
               >
                 Annuler
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-[#003938] text-white rounded-lg hover:bg-green-700"
+                className="px-8 py-2 bg-[#003938] text-white rounded-lg hover:bg-green-700 shadow-md"
               >
                 Valider
               </button>

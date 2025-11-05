@@ -47,10 +47,10 @@ export default function PrestationsPage() {
     <div className="flex flex-col min-h-screen">
       <Header />
 
-      <main className="flex-grow bg-[#fdfaf6] px-4 py-10">
-        <h1 className="text-7xl font-bold text-green-700 text-center mb-10">
+      <main className="flex-grow">
+        <h2 className="text-3xl md:text-4xl mb-6 mt-11 mx-11">
           Prestations
-        </h1>
+        </h2>
 
         {/* Desktop layout */}
         <div className="hidden md:flex flex-col items-center gap-6">
@@ -84,7 +84,7 @@ export default function PrestationsPage() {
                     </div>
 
                     {/* Icône + stylisé en bas à droite */}
-                    <div className="absolute bottom-3 right-4 text-green-700 text-xl font-bold bg-white/70 rounded-full w-6 h-6 flex items-center justify-center shadow">
+                    <div className="absolute bottom-3 right-4 text-green-800 hover:text-green-600 text-xl font-bold bg-white/70 rounded-full w-6 h-6 flex items-center justify-center shadow">
                       +
                     </div>
                   </div>
@@ -102,7 +102,7 @@ export default function PrestationsPage() {
                 </p>
                 <button
                   onClick={() => setOpenCardIndex(null)}
-                  className="mt-4 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded text-sm"
+                  className="mt-4 px-4 py-2 bg-green-800 hover:bg-green-600 text-white rounded text-sm"
                 >
                   Fermer
                 </button>
@@ -112,7 +112,7 @@ export default function PrestationsPage() {
         </div>
 
         {/* Mobile layout */}
-        <div className="md:hidden flex flex-col gap-4 mt-10">
+        <div className="md:hidden flex flex-col gap-4 mt-10 mb-10 px-4">
           {prestations.map((prestation, index) => {
             const isOpen = openCardIndex === index;
 
@@ -128,13 +128,13 @@ export default function PrestationsPage() {
                   <p className="font-bold">{prestation.price}</p>
                 </div>
                 {isOpen && (
-                  <div className="bg-white rounded-xl shadow-inner p-4 mt-2">
+                  <div className="bg-white rounded-xl shadow-inner p-4 mt-2 mb-4">
                     <p className="text-sm text-gray-700">
                       {prestation.details}
                     </p>
                     <button
                       onClick={() => setOpenCardIndex(null)}
-                      className="mt-4 px-4 py-1 bg-green-600 hover:bg-green-700 text-white rounded text-sm"
+                      className="mt-4 px-4 py-1 bg-green-800 hover:bg-green-600 text-white rounded text-sm"
                     >
                       Fermer
                     </button>

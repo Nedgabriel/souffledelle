@@ -6,18 +6,28 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "static.cdnlogo.com", // pour Facebook, Instagram, LinkedIn
+        hostname: "static.cdnlogo.com",
         port: "",
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "img.icons8.com", // si tu veux utiliser icons8 pour un logo spécifique
+        hostname: "img.icons8.com",
         port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "fjrhwflqjaecexhneblt.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
+      {
+        protocol: "https",
+        hostname: "img.icons8.com",
         pathname: "/**",
       },
     ],
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

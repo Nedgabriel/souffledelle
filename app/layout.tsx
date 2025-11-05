@@ -1,6 +1,5 @@
-// app/layout.tsx
 import "./globals.css";
-import { Poppins, Nunito } from "next/font/google";
+import { Poppins, Nunito, Dancing_Script } from "next/font/google";
 import type { Metadata } from "next";
 
 // Chargement des polices
@@ -18,6 +17,13 @@ const nunito = Nunito({
   display: "swap",
 });
 
+const dancing = Dancing_Script({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dancing",
+  display: "swap",
+});
+
 // Métadonnées globales
 export const metadata: Metadata = {
   title: "Salamata KA - Sophrologue",
@@ -25,14 +31,17 @@ export const metadata: Metadata = {
     "Site officiel de Salamata KA, sophrologue à Valence et en ligne.",
 };
 
-// Composant racine de l'application
+// Composant racine
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${poppins.variable} ${nunito.variable}`}>
+    <html
+      lang="fr"
+      className={`${poppins.variable} ${nunito.variable} ${dancing.variable}`}
+    >
       <body className="font-nunito text-[#2f2f2f] bg-[#fdfaf6] min-h-screen flex flex-col">
         {children}
       </body>

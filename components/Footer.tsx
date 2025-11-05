@@ -8,25 +8,25 @@ export default function Footer() {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <footer className="bg-[#003938] text-white p-6 rounded-2xl flex flex-wrap gap-6 justify-center ">
+    <footer className="p-6 flex flex-wrap gap-6 justify-center ">
       {/* Bloc newsletter */}
-      <div className="flex-1 min-w-[250px] max-w-[350px]">
-        <div className="flex flex-col items-start">
+      <div className="flex-1">
+        <div className="flex flex-col ">
           <Link href="/">
             <Image
               src="/logo-couleur-sophro.png"
               alt="Logo Salamata"
-              width={100}
+              width={120}
               height={100}
-              className="mb-4"
+              className="mb-5"
             />
           </Link>
-          <h2 className="font-poppins mb-4 text-lg font-semibold">
+          <h2>
             Abonnez-vous à notre newsletter pour recevoir toutes les dernières
             nouvelles.
           </h2>
-          <div className="flex items-center w-full mb-4 relative">
-            <div className="relative w-full">
+          <div className="flex  w-full mb-4 relative">
+            <div className="relative w-full mr-6">
               <input
                 type="email"
                 id="newsletter-email"
@@ -51,30 +51,21 @@ export default function Footer() {
                 Adresse email
               </label>
             </div>
-            <button className="ml-2 w-12 h-12 bg-green-700 rounded-full flex items-center justify-center hover:bg-green-600 transition">
-              →
-            </button>
+            <button className="btn-green px-4 mr-2"> →</button>
           </div>
         </div>
       </div>
 
       {/* Bloc contact */}
-      <div className="flex-1 min-w-[250px] max-w-[350px]">
-        <h2 className="font-poppins mb-4 text-lg font-semibold">
-          Coordonnées de contact
-        </h2>
-        <p className="flex items-center gap-3 mb-4 text-base">
-          📞 06.79.16.61.55
-        </p>
-        <p className="flex items-center gap-3 mb-4 text-base">
+      <div>
+        <h2>Coordonnées de contact</h2>
+        <p className="flex">📞 06.79.16.61.55</p>
+        <p className="flex mb-4">
           📍 4 Av. de la Rose des Vents, 26000 Valence
         </p>
-        <div className="overflow-hidden rounded-2xl border border-gray-300">
+        <div className="overflow-hidden rounded-2xl ">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2889.508928123456!2d4.890170315498123!3d44.933456879098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b56c1234567890%3A0x1234567890abcdef!2s4%20Av.%20de%20la%20Rose%20des%20Vents%2C%2026000%20Valence%2C%20France!5e0!3m2!1sen!2sfr!4v1234567890123!5m2!1sen!2sfr"
-            width="100%"
-            height="200"
-            className="block"
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -82,10 +73,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="flex-1 min-w-[250px] max-w-[350px] flex flex-col items-start">
-        <h2 className="font-poppins mb-4 text-lg font-semibold">
-          Réseaux sociaux
-        </h2>
+      <div className="flex-1">
+        <h2>Réseaux sociaux</h2>
         <div className="flex items-center gap-4">
           {/* Linktree */}
           <Link
