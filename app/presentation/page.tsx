@@ -17,9 +17,9 @@ export default function PresentationPage() {
     <>
       <Header />
       <div className="flex-grow">
-        <div className=" py-12 max-w-7xl mx-auto">
+        <div className=" py-11 max-w-7xl mx-auto">
           <section>
-            <h2 className="text-4xl px-12">
+            <h2 className="text-4xl px-11">
               Présentation de Salamata KA
             </h2>
           </section>

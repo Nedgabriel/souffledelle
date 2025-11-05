@@ -15,8 +15,8 @@ export default function Timeline() {
   const rightBlocks = timeline.filter((_, index) => index % 2 === 1);
 
   return (
-    <div className="w-full px-6 py-2 relative mb-30">
-      <h2 className="text-3xl md:text-4xl !text-white mb-12">
+    <div className="w-full px-3 py-3 relative mb-30">
+      <h2 className="text-3xl md:text-4xl !text-white">
         L’histoire de la sophrologie
       </h2>
 
